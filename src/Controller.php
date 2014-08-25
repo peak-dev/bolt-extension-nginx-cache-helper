@@ -1,6 +1,6 @@
 <?php
 
-namespace NginxCache;
+namespace Bolt\Extension\Bolt\NginxCache;
 
 class Controller
 {

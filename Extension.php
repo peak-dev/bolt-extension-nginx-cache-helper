@@ -1,13 +1,13 @@
 <?php
 
-namespace NginxCache;
+namespace Bolt\Extension\Bolt\NginxCache;
 
 class Extension extends \Bolt\BaseExtension
 {
 
     public function getName()
     {
-        return "NginX Cache Helper";
+        return "nginxcachehelper";
     }
 
     public function initialize()
