@@ -19,7 +19,7 @@
 			"init.php"
 		],
 		"psr-4" : {
-			"Bolt\\Extension\\Bolt\\NginxCache\\" : ""
+			"Bolt\\Extension\\Bolt\\NginxCacheHelper\\" : ""
 		}
 	},
 	"extra" : {
