@@ -1,8 +1,9 @@
 {
-	"name" : "bolt/nginxcache",
+	"name" : "bolt/nginxcachehelper",
 	"type" : "bolt-extension",
 	"keywords" : [
-		"NginX"
+		"NginX",
+		"cache"
 	],
 	"require" : {
 		"bolt/bolt" : ">=2.0.0,<3.0.0"
@@ -18,10 +19,7 @@
 			"init.php"
 		],
 		"psr-4" : {
-			"Bolt\\Extension\\Bolt\\NginxCache\\" : [
-				"",
-				"src/"
-			]
+			"Bolt\\Extension\\Bolt\\NginxCache\\" : ""
 		}
 	},
 	"extra" : {
