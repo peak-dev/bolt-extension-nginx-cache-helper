@@ -2,8 +2,8 @@
 	"name" : "bolt/nginxcachehelper",
 	"type" : "bolt-extension",
 	"keywords" : [
-		"NginX",
-		"cache"
+		"cache",
+		"Nginx"
 	],
 	"require" : {
 		"bolt/bolt" : ">=2.0.0,<3.0.0"

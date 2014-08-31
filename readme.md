@@ -1,7 +1,7 @@
 NginX Cache Helper
 ==================
 
-A simple application that helps to flush a record's content from NingX FastCGI, 
+A simple application that helps to flush a record's content from Nginx FastCGI, 
 proxy, SCGI and uWSGI caches on the record's post-save event.
 
 This requires that you are running NginX with the [ngx_cache_purge](http://labs.frickle.com/nginx_ngx_cache_purge/) 

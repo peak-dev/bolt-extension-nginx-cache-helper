@@ -9,7 +9,7 @@ class Extension extends \Bolt\BaseExtension
 
     public function getName()
     {
-        return "NginXCacheHelper";
+        return "NginxCacheHelper";
     }
 
     public function initialize() {
