@@ -23,8 +23,8 @@ class Extension extends \Bolt\BaseExtension
         $host = $this->app['paths']['hosturl'];
 
         // Purge it
-        $this->callPurgeFastCGIUrl($host . $this->config['purge']);
-        $this->callPurgeFastCGIUrl($host . $content->link() . $this->config['purge']);
+        $this->callPurgeFastCGIUrl($host . $this->config['nginx_purge_uri']);
+        $this->callPurgeFastCGIUrl($host . $content->link() . $this->config['nginx_purge_uri']);
     }
 
     /**
