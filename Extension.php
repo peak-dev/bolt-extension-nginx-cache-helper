@@ -2,7 +2,7 @@
 
 namespace Bolt\Extension\Bolt\NginxCacheHelper;
 
-use Bolt\StorageEvents;
+use Bolt\Events\StorageEvents;
 
 class Extension extends \Bolt\BaseExtension
 {
