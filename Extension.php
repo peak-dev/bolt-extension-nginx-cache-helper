@@ -2,6 +2,7 @@
 
 namespace Bolt\Extension\Bolt\NginxCacheHelper;
 
+use Bolt\Events\StorageEvent;
 use Bolt\Events\StorageEvents;
 
 class Extension extends \Bolt\BaseExtension
@@ -17,7 +18,12 @@ class Extension extends \Bolt\BaseExtension
         $this->app['dispatcher']->addListener(StorageEvents::POST_SAVE, array($this, 'hookPostSave'));
     }
 
-    public function hookPostSave($input)
+    /**
+     * Post save hook
+     *
+     * @param StorageEvent $input
+     */
+    public function hookPostSave(StorageEvent $input)
     {
         // Get the content
         $content = $input->getContent();
