@@ -15,6 +15,10 @@ class Extension extends \Bolt\BaseExtension
 
     public function initialize()
     {
+        if (! $this->config['enabled']) {
+            return;
+        }
+
         /*
          * Backend
          */
@@ -59,6 +63,7 @@ class Extension extends \Bolt\BaseExtension
     protected function getDefaultConfig()
     {
         return array(
+            'enabled' => true,
             'nginx_purge_uri' => 'purge'
         );
     }
