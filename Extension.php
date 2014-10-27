@@ -36,7 +36,7 @@ class Extension extends \Bolt\BaseExtension
 
         // Purge it
         $this->callPurgeFastCGIUrl($host . $this->config['nginx_purge_uri']);
-        $this->callPurgeFastCGIUrl($host . $content->link() . $this->config['nginx_purge_uri']);
+        $this->callPurgeFastCGIUrl($host . $content->link() . '/' . $this->config['nginx_purge_uri']);
     }
 
     /**
