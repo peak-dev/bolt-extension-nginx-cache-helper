@@ -12,12 +12,13 @@ class Extension extends \Bolt\BaseExtension
         return "NginxCacheHelper";
     }
 
-    public function initialize() {
+    public function initialize()
+    {
         $this->app['dispatcher']->addListener(StorageEvents::POST_SAVE, array($this, 'hookPostSave'));
     }
 
-    public function hookPostSave($input) {
-
+    public function hookPostSave($input)
+    {
         // Get the content
         $content = $input->getContent();
         $host = $this->app['paths']['hosturl'];
