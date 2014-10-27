@@ -15,7 +15,12 @@ class Extension extends \Bolt\BaseExtension
 
     public function initialize()
     {
-        $this->app['dispatcher']->addListener(StorageEvents::POST_SAVE, array($this, 'hookPostSave'));
+        /*
+         * Backend
+         */
+        if ($this->app['config']->getWhichEnd() == 'backend') {
+            $this->app['dispatcher']->addListener(StorageEvents::POST_SAVE, array($this, 'hookPostSave'));
+        }
     }
 
     /**
