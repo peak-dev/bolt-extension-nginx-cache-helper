@@ -4,66 +4,66 @@ namespace Bolt\Extension\Bolt\NginxCacheHelper;
 
 use Bolt\Events\StorageEvent;
 use Bolt\Events\StorageEvents;
+use Bolt\Extension\SimpleExtension;
+use GuzzleHttp\Exception\ClientException;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
-class Extension extends \Bolt\BaseExtension
+/**
+ * Nginx Cache Helper extension loader.
+ *
+ * @author Gawain Lynch <gawain.lynch@gmail.com>
+ */
+class NginxCacheHelperExtension extends SimpleExtension
 {
-
-    public function getName()
+    /**
+     * {@inheritdoc}
+     */
+    public function getDisplayName()
     {
-        return "NginxCacheHelper";
+        return 'Nginx Cache Helper';
     }
 
-    public function initialize()
+    /**
+     * {@inheritdoc}
+     */
+    protected function subscribe(EventDispatcherInterface $dispatcher)
     {
-        if (! $this->config['enabled']) {
-            return;
-        }
-
-        /*
-         * Backend
-         */
-        if ($this->app['config']->getWhichEnd() == 'backend') {
-            $this->app['dispatcher']->addListener(StorageEvents::POST_SAVE, array($this, 'hookPostSave'));
-        }
+        $dispatcher->addListener(StorageEvents::POST_SAVE, array($this, 'hookPostSave'));
     }
 
     /**
      * Post save hook
      *
-     * @param StorageEvent $input
+     * @param StorageEvent $event
      */
-    public function hookPostSave(StorageEvent $input)
+    public function hookPostSave(StorageEvent $event)
     {
-        // Get the content
-        $content = $input->getContent();
-        $host = $this->app['paths']['hosturl'];
+        $app = $this->getContainer();
+        $config = $this->getConfig();
+        $content = $event->getContent();
+        $rootUrl = $app['resources']->getUrl('rooturl');
 
-        // Purge it
-        $this->callPurgeFastCGIUrl($host . $this->config['nginx_purge_uri']);
-        $this->callPurgeFastCGIUrl($host . $content->link() . '/' . $this->config['nginx_purge_uri']);
+        $url = sprintf('%s%s', $rootUrl, $config['nginx_purge_uri']);
+        try {
+            $app['guzzle.client']->get($url);
+        } catch (ClientException $e) {
+            $app['logger.flash']->error(sprintf('Nginx cache purge failed for route %s with error: %s', $url, $e->getMessage()));
+        }
+
+        $url = sprintf('%s%s/%s', $rootUrl, $content->link(), $config['nginx_purge_uri']);
+        try {
+            $app['guzzle.client']->get($url);
+        } catch (ClientException $e) {
+            $app['logger.flash']->error(sprintf('Nginx cache purge failed for route %s with error: %s', $url, $e->getMessage()));
+        }
     }
 
     /**
-     *
-     * @param string $url
-     */
-    private function callPurgeFastCGIUrl($url)
-    {
-        $ch = curl_init($url);
-        curl_setopt($ch, CURLOPT_HEADER, 0);
-        curl_exec($ch);
-        curl_close($ch);
-    }
-
-    /**
-     * Default config
-     *
-     * @return array
+     * {@inheritdoc}
      */
     protected function getDefaultConfig()
     {
         return array(
-            'enabled' => true,
             'nginx_purge_uri' => 'purge'
         );
     }
