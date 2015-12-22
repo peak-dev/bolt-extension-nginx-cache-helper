@@ -1,25 +1,31 @@
 {
-	"name" : "bolt/nginxcachehelper",
-	"type" : "bolt-extension",
-	"keywords" : [
-		"cache",
-		"Nginx"
-	],
-	"require" : {
-		"bolt/bolt" : ">=2.0.0,<3.0.0"
-	},
-	"license" : "GPL-3.0+",
-	"authors" : [{
-			"name" : "Gawain Lynch",
-			"email" : "gawain.lynch@gmail.com"
-		}
-	],
-	"autoload" : {
-		"files" : [
-			"init.php"
-		],
-		"psr-4" : {
-			"Bolt\\Extension\\Bolt\\NginxCacheHelper\\" : ""
-		}
-	}
+    "name": "bolt/nginx-cache-helper",
+    "description": "Helper for flushing Nginx caches.",
+    "type": "bolt-extension",
+    "keywords": [
+        "cache",
+        "Nginx"
+    ],
+    "require": {
+        "bolt/bolt": "^3.0"
+    },
+    "license": "GPL-3.0+",
+    "authors": [
+        {
+            "name": "Gawain Lynch",
+            "email": "gawain.lynch@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Bolt\\Extension\\Bolt\\NginxCacheHelper\\": "src"
+        }
+    },
+    "extra": {
+        "bolt-class": "Bolt\\Extension\\Bolt\\NginxCacheHelper\\NginxCacheHelperExtension",
+        "branch-alias": {
+            "dev-master": "3.0.x-dev"
+        }
+    }
 }
+
