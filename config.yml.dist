@@ -1,5 +1,0 @@
-# Enable or disable functionality, either true or false
-enabled: true
-
-# Nginx location in server block
-nginx_purge_uri: purge

@@ -1,0 +1,2 @@
+# Nginx location in server block
+nginx_purge_uri: purge
